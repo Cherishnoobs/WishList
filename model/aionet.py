@@ -2,15 +2,10 @@
 网络请求模块
 '''
 
-from asyncio.log import logger
-from os import EX_CANTCREAT
-import re
-import json
 import asyncio
-from unittest import async_case
 from log import get_logger
 
-from httpx import Response, AsyncClient, head
+from httpx import Response, AsyncClient
 
 from static import HEADERS, TIMEOUT, TREAD_CD
 
@@ -48,4 +43,6 @@ async def http_get(client: AsyncClient, url: str, params: dict = None,
 
     logger.error('网络错误,请求失败')
     return (None)
+
+
 

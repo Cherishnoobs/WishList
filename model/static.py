@@ -29,3 +29,26 @@ class URLs():
     ITAD_Get_Overview_Prices = 'https://api.isthereanydeal.com/v01/game/overview/'
 
     Keylol_Get_Game_Info = 'https://steamdb.keylol.com/app/%s/data.js?v=38'
+
+
+Num2Review = {
+    -1: '【解析出错】',
+    0: '评测数量不足',
+    1: '差评如潮',
+    2: '特别差评',
+    3: '差评',
+    4: '多半差评',
+    5: '褒贬不一',
+    6: '多半好评',
+    7: '好评',
+    8: '特别好评',
+    9: '好评如潮'
+}
+
+GameType2Num = {
+    'Error': 0,
+    'Game': 1,
+    'Application': 2,
+    'DLC': 3,
+    'Video': 4
+}
