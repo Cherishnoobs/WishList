@@ -127,12 +127,12 @@ async def _get_single_page(client: AsyncClient, steamid: int, page: int = 0) ->d
             if wishlist[key]['name'] == '【解析出错】':
                 logger.debug(f'数据解析失败 {data}')
     return (wishlist)
+
+# 单元测试
 steamid = 76561198323399563
 
 async def test():
-        # client.cookies = {
-        #     'Cookie': f'wants_mature_content=1;Steam_Language={lang}'
-        # }
+
         try:
             await _get_wishlist(steamid=steamid)
         except Exception as e:
