@@ -1,3 +1,6 @@
+# 数据库名称
+DB_NAME = 'data.db'
+
 # 网络超时时间
 TIMEOUT = 10
 
