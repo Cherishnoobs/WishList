@@ -3,11 +3,11 @@
 '''
 
 import asyncio
-from log import get_logger
+from .log import get_logger
 
 from httpx import Response, AsyncClient
 
-from static import HEADERS, TIMEOUT, TREAD_CD
+from .static import HEADERS, TIMEOUT, TREAD_CD
 
 logger = get_logger('Net')
 

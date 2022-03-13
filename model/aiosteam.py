@@ -1,11 +1,11 @@
 import re
 import asyncio
-from unittest import async_case
+
 from httpx import AsyncClient
-from aionet import http_get
-from static import GameType2Num, Num2Review
-from static import URLs
-from log import get_logger
+from .aionet import http_get
+from .static import GameType2Num, Num2Review
+from .static import URLs
+from .log import get_logger
 from json import JSONDecodeError
 
 logger = get_logger('steam')
@@ -40,7 +40,6 @@ async def _get_wishlist(steamid: int, proxy: dict = None) -> dict:
     wishlist = {}
     for task in tasks:
         wishlist.update(task.result())
-    print(wishlist)
     return (wishlist)    
 
 
@@ -129,14 +128,14 @@ async def _get_single_page(client: AsyncClient, steamid: int, page: int = 0) ->d
     return (wishlist)
 
 # 单元测试
-steamid = 76561198323399563
+# steamid = 76561198323399563
 
-async def test():
+# async def test():
 
-        try:
-            await _get_wishlist(steamid=steamid)
-        except Exception as e:
-            logger.warning(f'{e}')
+#         try:
+#             await _get_wishlist(steamid=steamid)
+#         except Exception as e:
+#             logger.warning(f'{e}')
 
-loop = asyncio.get_event_loop()
-loop.run_until_complete(test())
+# loop = asyncio.get_event_loop()
+# loop.run_until_complete(test())

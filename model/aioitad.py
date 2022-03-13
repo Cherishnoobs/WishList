@@ -4,17 +4,14 @@
 
 
 import asyncio
-import json
-from pydoc import plain
-import aiosqlite
 
-from os import path
+
 from httpx import AsyncClient
 from json import JSONDecodeError
 
-from log import get_logger
-from aionet import http_get
-from static import URLs, DB_NAME
+from .log import get_logger
+from .aionet import http_get
+from .static import URLs, DB_NAME
 
 logger  = get_logger('ITAD')
 
@@ -46,7 +43,6 @@ async def get_plains(ids: list, token: str, proxy: dict = None) ->dict:
             for task in tasks:
                 dict = task.result()
                 id2pdict.update(dict)
-    print(id2pdict)
     return (id2pdict)
 
 async def _get_plain(client: AsyncClient, params: dict, ids: list) -> str:
@@ -207,7 +203,7 @@ async def _get_lowest_price(client: AsyncClient, params: dict, plains: list) -> 
                 price_time = d['added']
             else:
                 # 未发售游戏,没有价格,标记为-1
-                p_low, p_cut, p_time = -1, 0, 0
+                price_low, price_cut, price_time = -1, 0, 0
             pricedict[plain] = (price_low, price_cut, price_time)
     return (pricedict)
 
@@ -270,20 +266,20 @@ async def _get_card_info(client: AsyncClient, params: dict, plains: list) -> dic
 
 # 单元测试
 
-ids = [4000,3000]
-token = '71a7d4524266563df456abdede7f7145683d649e'
-async def test():
-        try:
-            # 获取ID
-            result = await get_plains(ids=ids, token=token)
-            plains = list(result.values())
-            current_dict = await get_current_price(plains, token, 'cn', 'CN')
-            lowest_dict = await get_lowest_price(plains, token, 'cn', 'CN')
-            card_dict = await get_card_info(plains, token)
-            print(current_dict)
-            print(lowest_dict)
-            print(card_dict)
-        except Exception as e:
-            logger.warning(f'{e}')
-loop = asyncio.get_event_loop()
-loop.run_until_complete(test())
+# ids = [4000,3000]
+# token = '71a7d4524266563df456abdede7f7145683d649e'
+# async def test():
+#         try:
+#             # 获取ID
+#             result = await get_plains(ids=ids, token=token)
+#             plains = list(result.values())
+#             current_dict = await get_current_price(plains, token, 'cn', 'CN')
+#             lowest_dict = await get_lowest_price(plains, token, 'cn', 'CN')
+#             card_dict = await get_card_info(plains, token)
+#             print(current_dict)
+#             print(lowest_dict)
+#             print(card_dict)
+#         except Exception as e:
+#             logger.warning(f'{e}')
+# loop = asyncio.get_event_loop()
+# loop.run_until_complete(test())

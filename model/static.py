@@ -7,6 +7,9 @@ TIMEOUT = 10
 # 每个线程的等待时间
 TREAD_CD = 0.8
 
+# 近史低标准
+ALMOST_LOWEST = 0.05
+
 HEADERS = {
     "Accept": "application/json",
     "Accept-Encoding": "gzip",
