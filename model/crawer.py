@@ -1,9 +1,13 @@
 from asyncio import Semaphore
+from symtable import Symbol
+
+from model.data2result import markdown
 
 from .log import get_logger
 from .aiosteam import _get_wishlist
 from .aioitad import get_plains, get_lowest_price, get_current_price, get_card_info
 from .utils import is_lowest
+from .data2result import markdown
 class Crawer(object):
     # {appid: {游戏详情}}
     wishdict = {} 
@@ -39,8 +43,8 @@ class Crawer(object):
         async with Semaphore(3): # 最大并发数
             await self.get_wishlist()
             await self.add_price()
-            
-    
+            self.output()    
+
 
     async def get_wishlist(self):
         '''
@@ -73,6 +77,7 @@ class Crawer(object):
         # 需修改
         current_dict = await get_current_price(plains, token, 'cn', 'CN')
         lowest_dict = await get_lowest_price(plains, token, 'cn', 'CN')
+        card_dict = await get_card_info(plains=plains,token=token)
 
         self.logger.info('整理游戏价格数据')
         for key in wishlist.keys():
@@ -110,5 +115,26 @@ class Crawer(object):
                 'low_time': p_low_time,
                 'is_lowest': is_lowest(p_old, p_now, p_low, p_cut)
             }
+            obj['card'] = card_dict[plain]
         
         self.logger.info('价格数据整理完成')
+
+        
+    def output(self):
+        '''
+        输出形成 markdown 文件
+        '''
+        wishdict = self.wishdict
+        # 写死
+        symbol = '¥'
+        index = wishdict.keys()
+
+        self.logger.info('开始输出')
+
+        try:
+            markdown.handler(wishdict, index, symbol)
+        except Exception as e:
+            self.logger.error(f'遇到错误: {e}')
+        
+
+        self.logger.info('输出完成')

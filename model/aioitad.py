@@ -11,7 +11,7 @@ from json import JSONDecodeError
 
 from .log import get_logger
 from .aionet import http_get
-from .static import URLs, DB_NAME
+from .static import URLs
 
 logger  = get_logger('ITAD')
 
@@ -231,6 +231,7 @@ async def get_card_info(plains: list, token: str, proxy: dict = None) -> dict:
         for task in tasks:
             dic = task.result()
             infodict.update(dic)
+        
     return (infodict)
 
 
@@ -254,12 +255,14 @@ async def _get_card_info(client: AsyncClient, params: dict, plains: list) -> dic
             data = resp.json().get('data', {})
         except (JSONDecodeError, AttributeError):
             logger.error(f'json解析失败')
-            data = {}
         for plain in data.keys():
             d = data[plain]
-            has_achi = d.get('achievements', False)
-            has_card = d.get('trading_cards', False)
-            infodict[plain] = [has_achi,has_card]
+            # print(d)
+            # has_achi = d.get('achievements', False)
+            has_card = True if d['trading_cards'] else False
+            print(has_card)
+
+            infodict[plain] = has_card
     return (infodict)
 
 

@@ -1,5 +1,5 @@
-# 数据库名称
-DB_NAME = 'data.db'
+# 输出文件夹名称
+OP_PATH = 'output'
 
 # 网络超时时间
 TIMEOUT = 10
@@ -8,7 +8,7 @@ TIMEOUT = 10
 TREAD_CD = 0.8
 
 # 近史低标准
-ALMOST_LOWEST = 0.05
+ALMOST_LOWEST = 0.5
 
 HEADERS = {
     "Accept": "application/json",
