@@ -2,6 +2,7 @@
 # @Description  : 输出Markdown文件
 '''
 
+from ctypes.wintypes import tagSIZE
 from ..log import get_logger
 from ..utils import is_lowest_str, get_output_path
 
@@ -32,8 +33,8 @@ def formater(wishdict: dict, index: list, symbol: str) -> str:
 
     result = []
     result.append(
-        f'|预览图|游戏名称|卡牌|现价({symbol})|原价({symbol})|折扣|史低({symbol})|史低|评测|')
-    result.append('|-|-|-|-|-|-|-|-|-|')
+        f'|预览图|游戏名称|卡牌|现价({symbol})|原价({symbol})|折扣|史低({symbol})|史低|评测|标签|')
+    result.append('|-|-|-|-|-|-|-|-|-|-|')
 
     if wishdict:
         for appid, detail in wishdict.items():
@@ -70,10 +71,10 @@ def formater(wishdict: dict, index: list, symbol: str) -> str:
             r_total = review['total']
 
             review_str = f'{r_result} ({r_total})'
-
-
-            result.append((f'|[![]({pic})]({link})|[{name}]({link})|{card}|'
-                           f'{p_now}|{p_old}|{discount}|{p_low}|{shidi}|{review_str}|'))
+            tags = ','.join(detail['tags'])
+            print(tags)
+            result.append((f'|[![]({pic})]({link})|[{name}]({link})|{card}|{p_now}|{p_old}|{discount}|{p_low}|{shidi}|{review_str}|{tags}|'
+                           ))
     
     else:
         result.append('游戏列表空,请检查过滤器设置以及是否将愿望单公开')

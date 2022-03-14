@@ -133,7 +133,7 @@ async def _get_single_page(client: AsyncClient, steamid: int, page: int = 0) ->d
 # async def test():
 
 #         try:
-#             await _get_wishlist(steamid=steamid)
+#             wishlist = await _get_wishlist(steamid=steamid)
 #         except Exception as e:
 #             logger.warning(f'{e}')
 

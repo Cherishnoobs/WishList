@@ -260,7 +260,6 @@ async def _get_card_info(client: AsyncClient, params: dict, plains: list) -> dic
             # print(d)
             # has_achi = d.get('achievements', False)
             has_card = True if d['trading_cards'] else False
-            print(has_card)
 
             infodict[plain] = has_card
     return (infodict)
