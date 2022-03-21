@@ -1,13 +1,12 @@
 from asyncio import Semaphore
 from symtable import Symbol
 
-from model.data2result import markdown
 
 from .log import get_logger
 from .aiosteam import _get_wishlist
 from .aioitad import get_plains, get_lowest_price, get_current_price, get_card_info
 from .utils import is_lowest
-from .data2result import markdown
+from .handler import data2md
 class Crawer(object):
     # {appid: {游戏详情}}
     wishdict = {} 

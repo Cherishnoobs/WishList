@@ -72,7 +72,6 @@ def formater(wishdict: dict, index: list, symbol: str) -> str:
 
             review_str = f'{r_result} ({r_total})'
             tags = ','.join(detail['tags'])
-            print(tags)
             result.append((f'|[![]({pic})]({link})|[{name}]({link})|{card}|{p_now}|{p_old}|{discount}|{p_low}|{shidi}|{review_str}|{tags}|'
                            ))
     
