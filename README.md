@@ -2,7 +2,7 @@
 Simple Steam Wishlist Crawler
 
 ## 环境要求
-python 3.5 及以上
+python 3.6 及以上
 
 ## 部署
 
